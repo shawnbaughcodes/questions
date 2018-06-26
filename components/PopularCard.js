@@ -17,7 +17,11 @@ const styles = {
     marginLeft: 10,
     marginRight: 10,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowRadius: 4,
+    shadowColor: 'grey',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 2, height: 2 }
   },
   headerStyle: {
     fontFamily: 'Avenir-Black'

@@ -3,15 +3,30 @@ import { Text, View, Dimensions, ScrollView } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 
 import PopularCard from '../components/PopularCard';
+import RecentFriendsCard from '../components/RecentFriendsCard';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 const HomeScreen = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.popularHeading}>Todays Popular Topics</Text>
-      <ScrollView horizontal style={styles.popularCards}>
-        <PopularCard />
-      </ScrollView>
+      <View style={styles.popularCards}>
+        <ScrollView horizontal>
+          <PopularCard />
+        </ScrollView>
+      </View>
+      <View style={styles.recentFriends}>
+        <Text style={styles.popularHeading}>Recently Asked</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.recentFriendsScroll}>
+            <RecentFriendsCard />
+            <RecentFriendsCard />
+            <RecentFriendsCard />
+          </View>
+        </ScrollView>
+      </View>
       <Icon
         raised
         name="menu"
@@ -39,7 +54,10 @@ const styles = {
     width: SCREEN_WIDTH
   },
   popularCards: {
-    width: SCREEN_WIDTH
+    width: SCREEN_WIDTH,
+    paddingTop: 15,
+    paddingBottom: 15,
+    backgroundColor: '#EDF1F2'
   },
   menuIcon: {
     position: 'absolute',
@@ -54,8 +72,29 @@ const styles = {
   popularHeading: {
     fontSize: 30,
     fontFamily: 'Avenir-Black',
+    alignSelf: 'flex-start',
+    paddingLeft: 10
+  },
+  recentFriendsHeading: {
+    fontSize: 30,
+    fontFamily: 'Avenir-Black',
     alignSelf: 'left',
     paddingLeft: 10
+  },
+  recentFriends: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT - 250,
+    paddingTop: 15,
+    borderTopColor: 'grey',
+    borderTopWidth: 0.2,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  recentFriendsScroll: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: SCREEN_WIDTH
+    // justifyContent: 'center',
   }
 };
 
