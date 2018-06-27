@@ -3,6 +3,7 @@ import { Text, View, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import FriendCard from '../components/FriendCard';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -11,11 +12,13 @@ const FriendsScreen = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.friendsHeader}>Friends</Text>
-      <View style={styles.friendsContainer}>
-        <FriendCard />
-        <FriendCard />
-        <FriendCard />
-      </View>
+      <ScrollView>
+        <View style={styles.friendsContainer}>
+          <FriendCard />
+          <FriendCard />
+          <FriendCard />
+        </View>
+      </ScrollView>
       <Icon
         raised
         name="menu"
