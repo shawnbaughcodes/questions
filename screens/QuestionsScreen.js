@@ -7,7 +7,6 @@ import QuestionCard from '../components/QuestionCard';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const QuestionsScreen = props => {
-  console.log(props);
   return (
     <View style={styles.container}>
       <Text style={styles.topicsHeadingStyle}>Topics</Text>

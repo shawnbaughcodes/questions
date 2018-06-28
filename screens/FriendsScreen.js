@@ -8,7 +8,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const FriendsScreen = props => {
-  console.log(props);
   return (
     <View style={styles.container}>
       <Text style={styles.friendsHeader}>Friends</Text>

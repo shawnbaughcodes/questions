@@ -5,7 +5,6 @@ import { Icon, Avatar, Button } from 'react-native-elements';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const AccountScreen = props => {
-  console.log(props);
   return (
     <View style={styles.container}>
       <Avatar
