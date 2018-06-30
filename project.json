@@ -1,0 +1,8 @@
+{
+  "name": "questions-db",
+  "description": "These are the functions for the react native application Questions",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::479971721613:role/questions-db_lambda_function",
+  "environment": {}
+}

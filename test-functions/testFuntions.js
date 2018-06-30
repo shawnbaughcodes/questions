@@ -41,7 +41,7 @@ export const sampleReadQuery = (e, ctx, callback) => {
     Key: 'players'
   };
 
-  db.scan(scanningProperties, (err, data) => {
+  db.query(scanningProperties, (err, data) => {
     if (err) {
       callback(err, null);
     } else {
