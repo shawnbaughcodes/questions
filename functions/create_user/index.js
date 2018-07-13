@@ -13,10 +13,12 @@ exports.handle = function(e, ctx, cb) {
   let params = {
     Item: {
       id: userId,
-      username: e.username,
-      email: e.email,
-      password: e.password,
-      createdAt: Date.now()
+      user: {
+        username: e.username,
+        email: e.email,
+        password: e.password,
+        createdAt: Date.now()
+      }
     },
     TableName: 'questions'
   };
