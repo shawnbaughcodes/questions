@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const bcrypt = require('bcryptjs');
 const db = new aws.DynamoDB.DocumentClient({ region: 'us-west-2' });
 
 const userId =
@@ -15,8 +16,9 @@ exports.handle = function(e, ctx, cb) {
       id: userId,
       user: {
         username: e.username,
-        email: e.email,
-        password: e.password,
+        email: /\S*\@\S*\.\S+/g.test(e.email),
+        password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10)),
+        questions: e.questions,
         createdAt: Date.now()
       }
     },
