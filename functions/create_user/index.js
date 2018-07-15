@@ -16,7 +16,7 @@ exports.handle = function(e, ctx, cb) {
       id: userId,
       user: {
         username: e.username,
-        email: /\S*\@\S*\.\S+/g.test(e.email),
+        email: /\S*\@\S*\.\S+/g.test(e.email) ? e.email : false,
         password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10)),
         questions: e.questions,
         createdAt: Date.now()
@@ -25,7 +25,7 @@ exports.handle = function(e, ctx, cb) {
     TableName: 'questions'
   };
   db.put(params, (err, data) => {
-    if (err) {
+    if (err || params.Item.user.email === false) {
       cb(err, null);
     } else {
       cb(null, data);
