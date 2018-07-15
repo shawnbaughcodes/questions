@@ -14,7 +14,7 @@ exports.handle = function(e, ctx, cb) {
   let params = {
     Item: {
       id: userId,
-      user: {
+      users: {
         username: e.username,
         email: /\S*\@\S*\.\S+/g.test(e.email) ? e.email : false,
         password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10)),
@@ -31,4 +31,6 @@ exports.handle = function(e, ctx, cb) {
       cb(null, data);
     }
   });
+
+  userId = null;
 };
