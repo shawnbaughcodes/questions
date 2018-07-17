@@ -12,17 +12,12 @@ exports.handle = function(e, ctx, cb) {
       .toString(36)
       .substring(2, 15);
 
-  let email = null;
-  if (/\S*\@\S*\.\S+/g.test(e.email)) {
-    email = e.email;
-  }
-
   let params = {
     Item: {
       id: userId,
       users: {
         username: e.username,
-        email: email,
+        email: /\S*\@\S*\.\S+/g.test(e.email) ? e.email : null,
         password: bcrypt.hashSync(e.password, bcrypt.genSaltSync(10)),
         questions: e.questions,
         createdAt: Date.now()

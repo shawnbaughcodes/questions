@@ -1,0 +1,8 @@
+{
+  "name": "questions-create-user",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "bcryptjs": "^2.4.3"
+  }
+}
