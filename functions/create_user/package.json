@@ -4,5 +4,8 @@
   "private": true,
   "devDependencies": {
     "bcryptjs": "^2.4.3"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^2.0.14"
   }
 }
