@@ -1,59 +1,58 @@
-import { UserPoolId, ClientId } from './keys';
-import {
-  CognitoUserAttribute,
-  CognitoUserPool,
-  CognitoUser
-} from 'amazon-cognito-identity-js';
+global.fetch = require('node-fetch');
 const aws = require('aws-sdk');
-const bcrypt = require('bcryptjs');
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const { UserPoolId, ClientId, Secret } = require('./keys');
 const db = new aws.DynamoDB.DocumentClient({ region: 'us-west-2' });
+
 const poolData = {
   UserPoolId: UserPoolId,
-  ClientId: '4pe2usejqcdmhi0a25jp4b5sh3'
+  ClientId: ClientId
 };
-const userPool = new CognitoUserPool(poolData);
+let userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 exports.handle = function(e, ctx, cb) {
   let attributeList = [];
   let dataEmail = {
     Name: 'email',
-    Value: 'anemail@email.com'
+    Value: 'b@b.com'
   };
-  let attributeEmail = new CognitoUserAttribute(dataEmail);
+  let attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
+    dataEmail
+  );
 
   attributeList.push(attributeEmail);
   let userId = null;
-  userPool.signUp(
-    'username',
-    'password',
-    attributeList,
-    null,
-    (err, result) => {
-      if (err) {
-        return err.message;
-      } else {
-        CognitoUser = result.user;
-        console.log(`UserName is ${CognitoUser.getUsername()}`);
-      }
-    }
-  );
-  let date = new Date();
-  let params = {
-    Item: {
-      id: userId,
-      users: {
-        questions: e.questions,
-        createdAt: date
-      }
-    },
-    TableName: 'questions'
-  };
-
-  db.put(params, (err, data) => {
-    if (err || params.Item.users.email === null) {
-      cb(err, null);
+  let cognitoUser = null;
+  userPool.signUp('alexcomes', 'Password1!', attributeList, null, function(
+    err,
+    result,
+    cognitoUser
+  ) {
+    if (err) {
+      return err;
     } else {
-      cb(null, data);
+      cognitoUser = result;
     }
   });
+  console.log('USER POOL User: ', cognitoUser);
+
+  // let date = new Date();
+  // let params = {
+  //   Item: {
+  //     id: userId,
+  //     users: {
+  //       questions: e.questions,
+  //       createdAt: date
+  //     }
+  //   },
+  //   TableName: 'questions'
+  // };
+
+  // db.put(params, (err, data) => {
+  //   if (err || params.Item.users.email === null) {
+  //     cb(err, null);
+  //   } else {
+  //     cb(null, data);
+  //   }
+  // });
 };
