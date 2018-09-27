@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "amazon-cognito-identity-js": "^2.0.14",
+    "node-fetch": "^2.1.2"
   }
 }

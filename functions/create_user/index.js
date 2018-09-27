@@ -21,9 +21,11 @@ exports.handle = function(e, ctx, cb) {
   );
 
   attributeList.push(attributeEmail);
+  let date = new Date();
   let userId = null;
-  let cognitoUser = null;
-  userPool.signUp('alexcomes', 'Password1!', attributeList, null, function(
+  let cognitoUser = {};
+
+  userPool.signUp('bob', 'Password2!', attributeList, null, function(
     err,
     result,
     cognitoUser
@@ -31,28 +33,26 @@ exports.handle = function(e, ctx, cb) {
     if (err) {
       return err;
     } else {
-      cognitoUser = result;
+      cognitoUser = result.user;
+
+      console.log('USER POOL User: ', cognitoUser);
+      // let params = {
+      //   Item: {
+      //     id: userId,
+      //     users: {
+      //       questions: e.questions,
+      //       createdAt: date
+      //     }
+      //   },
+      //   TableName: 'questions'
+      // };
+      // db.put(params, (err, data) => {
+      //   if (err || params.Item.users.email === null) {
+      //     cb(err, null);
+      //   } else {
+      //     cb(null, data);
+      //   }
+      // });
     }
   });
-  console.log('USER POOL User: ', cognitoUser);
-
-  // let date = new Date();
-  // let params = {
-  //   Item: {
-  //     id: userId,
-  //     users: {
-  //       questions: e.questions,
-  //       createdAt: date
-  //     }
-  //   },
-  //   TableName: 'questions'
-  // };
-
-  // db.put(params, (err, data) => {
-  //   if (err || params.Item.users.email === null) {
-  //     cb(err, null);
-  //   } else {
-  //     cb(null, data);
-  //   }
-  // });
 };
